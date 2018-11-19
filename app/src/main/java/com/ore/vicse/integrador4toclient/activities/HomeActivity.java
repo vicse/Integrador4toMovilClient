@@ -11,6 +11,8 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ore.vicse.integrador4toclient.R;
@@ -33,6 +35,19 @@ public class HomeActivity extends AppCompatActivity {
 
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         navigationView = (NavigationView) findViewById(R.id.navview);
+
+        // Change navigation header information
+        ImageView photoImage = (ImageView) navigationView.getHeaderView(0).findViewById(R.id.menu_photo);
+        photoImage.setBackgroundResource(R.drawable.ic_profile);
+
+        TextView fullnameText = (TextView) navigationView.getHeaderView(0).findViewById(R.id.menu_fullname);
+        fullnameText.setText("Vicse Jefer Ore Soto");
+
+        TextView emailText = (TextView) navigationView.getHeaderView(0).findViewById(R.id.menu_email);
+        emailText.setText("vicse.ore@tecsup.edu.pe");
+
+
+
 
         setFragmentByDefault();
 
