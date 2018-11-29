@@ -1,5 +1,6 @@
 package com.ore.vicse.integrador4toclient.adapters;
 
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ore.vicse.integrador4toclient.R;
+import com.ore.vicse.integrador4toclient.activities.HomeActivity;
+import com.ore.vicse.integrador4toclient.fragments.ProductFragment;
+import com.ore.vicse.integrador4toclient.fragments.ProviderFragment;
 import com.ore.vicse.integrador4toclient.models.Proveedor;
 import com.squareup.picasso.Picasso;
 
@@ -47,15 +51,25 @@ public class ProveedoresAdapter extends RecyclerView.Adapter<ProveedoresAdapter.
     }
 
     @Override
-    public void onBindViewHolder(ProveedoresAdapter.ViewHolder viewHolder, int position) {
+    public void onBindViewHolder(final ProveedoresAdapter.ViewHolder viewHolder, int position) {
 
-        Proveedor proveedor = this.proveedores.get(position);
+        final Proveedor proveedor = this.proveedores.get(position);
 
         viewHolder.empresaText.setText(proveedor.getEmpresa());
         viewHolder.correoText.setText(proveedor.getCorreo());
 
         String url = proveedor.getImagen();
         Picasso.with(viewHolder.itemView.getContext()).load(url).into(viewHolder.fotoImage);
+
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(viewHolder.itemView.getContext(), ProviderFragment.class);
+                intent.putExtra("IdProducto", proveedor.getId_proveedor());
+                //startActivity(intent);
+            }
+        });
+
 
     }
 

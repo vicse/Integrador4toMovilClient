@@ -1,6 +1,8 @@
 package com.ore.vicse.integrador4toclient.activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -43,11 +45,11 @@ public class RegisterClientActivity extends AppCompatActivity {
 
     public void callRegister(View view){
 
-        String nombre = nombreInput.getText().toString();
-        String correo = correoInput.getText().toString();
-        String dni = dniInput.getText().toString();
-        String direccion = direccionInput.getText().toString();
-        String password = passwordInput.getText().toString();
+        final String nombre = nombreInput.getText().toString();
+        final String correo = correoInput.getText().toString();
+        final String dni = dniInput.getText().toString();
+        final String direccion = direccionInput.getText().toString();
+        final String password = passwordInput.getText().toString();
 
         if (nombre.isEmpty() || correo.isEmpty() || dni.isEmpty() || direccion.isEmpty() || password.isEmpty()){
             Toast.makeText(this, "Todos los campos son requeridos" ,Toast.LENGTH_SHORT).show();
@@ -73,10 +75,20 @@ public class RegisterClientActivity extends AppCompatActivity {
                         Cliente cliente = response.body();
                         Log.d(TAG, "cliente: " + cliente);
                         Toast.makeText(RegisterClientActivity.this, "Registro satisfactorio", Toast.LENGTH_LONG).show();
+
+                        SharedPreferences preferences = getSharedPreferences("credenciales", Context.MODE_PRIVATE);
+
+                        SharedPreferences.Editor editor=preferences.edit();
+                        editor.putInt("id", cliente.getId_cliente());
+                        editor.putString("nombre", nombre);
+                        editor.putString("correo", correo);
+                        editor.putString("dni", dni);
+                        editor.putString("direccion", direccion);
+                        editor.putString("password", password);
+                        editor.commit();
+
+                        startActivity(new Intent(RegisterClientActivity.this, HomeActivity.class));
                         finish();
-                        Intent intent = new Intent(RegisterClientActivity.this, HomeActivity.class);
-                        intent.putExtra("IdCliente", cliente.getId_cliente());
-                        startActivity(intent);
 
                     } else {
                         Log.e(TAG, "onError: " + response.errorBody().string());

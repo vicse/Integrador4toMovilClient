@@ -1,6 +1,8 @@
 package com.ore.vicse.integrador4toclient.activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -24,6 +26,9 @@ import com.ore.vicse.integrador4toclient.fragments.ProviderFragment;
 
 public class HomeActivity extends AppCompatActivity {
 
+    private String nombreCli;
+    private String correoCli;
+
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
 
@@ -36,18 +41,20 @@ public class HomeActivity extends AppCompatActivity {
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         navigationView = (NavigationView) findViewById(R.id.navview);
 
+        SharedPreferences preferences = getSharedPreferences("credenciales", Context.MODE_PRIVATE);
+
+        nombreCli = preferences.getString("nombre", "Cliente");
+        correoCli = preferences.getString("correo", "cliente@tecsup.edu.pe");
+
         // Change navigation header information
         ImageView photoImage = (ImageView) navigationView.getHeaderView(0).findViewById(R.id.menu_photo);
         photoImage.setBackgroundResource(R.drawable.ic_profile);
 
         TextView fullnameText = (TextView) navigationView.getHeaderView(0).findViewById(R.id.menu_fullname);
-        fullnameText.setText("Vicse Jefer Ore Soto");
+        fullnameText.setText(nombreCli);
 
         TextView emailText = (TextView) navigationView.getHeaderView(0).findViewById(R.id.menu_email);
-        emailText.setText("vicse.ore@tecsup.edu.pe");
-
-
-
+        emailText.setText(correoCli);
 
         setFragmentByDefault();
 
