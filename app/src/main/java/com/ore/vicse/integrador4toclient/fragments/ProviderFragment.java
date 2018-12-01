@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.ore.vicse.integrador4toclient.R;
-import com.ore.vicse.integrador4toclient.activities.HomeActivity;
 import com.ore.vicse.integrador4toclient.adapters.ProveedoresAdapter;
 import com.ore.vicse.integrador4toclient.services.ApiService;
 import com.ore.vicse.integrador4toclient.services.ApiServiceGenerator;
@@ -24,10 +23,9 @@ import retrofit2.Response;
 
 public class ProviderFragment extends Fragment {
 
-    private static final String TAG = "ProviderFragment";
+    private static final String TAG = ProviderFragment.class.getSimpleName();
 
     private RecyclerView proveedoresList;
-    public static ProveedoresAdapter adapter;
 
     public ProviderFragment() {
     }
@@ -40,19 +38,12 @@ public class ProviderFragment extends Fragment {
 
         proveedoresList = (RecyclerView) view.findViewById(R.id.recyclerview);
         proveedoresList.setLayoutManager(new LinearLayoutManager(getContext()));
-        proveedoresList.setAdapter(new ProveedoresAdapter());
+
+        proveedoresList.setAdapter(new ProveedoresAdapter(getActivity()));
         initialize();
 
         return view;
     }
-
-    @Override
-    public void onActivityCreated(Bundle state){
-        super.onActivityCreated(state);
-        proveedoresList.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapter = new ProveedoresAdapter();
-    }
-
 
     private void initialize(){
 

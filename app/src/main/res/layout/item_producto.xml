@@ -21,34 +21,45 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp">
+        android:padding="8dp">
 
         <ImageView
             android:id="@+id/foto_imageProducto"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
+            android:layout_width="321dp"
+            android:layout_height="117dp"
             android:layout_alignParentStart="true"
-            android:layout_marginEnd="16dp"
-            app:srcCompat="@drawable/ic_person_black"/>
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="19dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="4dp"
+            app:srcCompat="@drawable/ic_person_black" />
 
         <TextView
             android:id="@+id/nombre_text"
-            android:layout_width="match_parent"
+            android:layout_width="321dp"
             android:layout_height="wrap_content"
-            android:layout_toEndOf="@+id/foto_imageProducto"
+            android:layout_below="@+id/foto_imageProducto"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="23dp"
+            android:layout_marginTop="9dp"
+            android:layout_marginEnd="0dp"
+            android:text="Nombre"
             android:textSize="20sp"
-            android:textStyle="bold"
-            android:text="Nombre"/>
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/precio_text"
-            android:layout_width="match_parent"
+            android:layout_width="321dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/nombre_text"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="12dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            android:layout_toEndOf="@+id/foto_image"
             android:text="Precio"
             android:textSize="16sp" />
 

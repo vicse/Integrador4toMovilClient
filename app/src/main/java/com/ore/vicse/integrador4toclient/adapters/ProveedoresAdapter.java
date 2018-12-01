@@ -1,6 +1,7 @@
 package com.ore.vicse.integrador4toclient.adapters;
-
-import android.content.Intent;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,38 +10,39 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ore.vicse.integrador4toclient.R;
-import com.ore.vicse.integrador4toclient.activities.HomeActivity;
 import com.ore.vicse.integrador4toclient.fragments.ProductFragment;
-import com.ore.vicse.integrador4toclient.fragments.ProviderFragment;
 import com.ore.vicse.integrador4toclient.models.Proveedor;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProveedoresAdapter extends RecyclerView.Adapter<ProveedoresAdapter.ViewHolder>{
+public class ProveedoresAdapter extends RecyclerView.Adapter<ProveedoresAdapter.ViewHolder> {
+
+    private FragmentActivity activity;
 
     private List<Proveedor> proveedores;
-
-    public ProveedoresAdapter(){
-        this.proveedores = new ArrayList<>();
-    }
 
     public void setProveedores(List<Proveedor> proveedores){
         this.proveedores = proveedores;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public ProveedoresAdapter(FragmentActivity activity){
+        this.activity = activity;
+        this.proveedores = new ArrayList<>();
+    }
+
+    public  class ViewHolder extends RecyclerView.ViewHolder{
 
         public ImageView fotoImage;
-        public TextView empresaText;
         public TextView correoText;
+        public TextView empresaText;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            fotoImage = itemView.findViewById(R.id.foto_image);
-            empresaText = itemView.findViewById(R.id.empresa_text);
-            correoText = itemView.findViewById(R.id.correo_text);
+            fotoImage = (ImageView) itemView.findViewById(R.id.foto_image);
+            empresaText = (TextView) itemView.findViewById(R.id.empresa_text);
+            correoText = (TextView) itemView.findViewById(R.id.correo_text);
         }
     }
 
@@ -55,18 +57,22 @@ public class ProveedoresAdapter extends RecyclerView.Adapter<ProveedoresAdapter.
 
         final Proveedor proveedor = this.proveedores.get(position);
 
-        viewHolder.empresaText.setText(proveedor.getEmpresa());
-        viewHolder.correoText.setText(proveedor.getCorreo());
-
         String url = proveedor.getImagen();
         Picasso.with(viewHolder.itemView.getContext()).load(url).into(viewHolder.fotoImage);
+
+        viewHolder.empresaText.setText(proveedor.getEmpresa());
+
+        viewHolder.correoText.setText(proveedor.getCorreo());
 
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(viewHolder.itemView.getContext(), ProviderFragment.class);
-                intent.putExtra("IdProducto", proveedor.getId_proveedor());
-                //startActivity(intent);
+                if(proveedor.getId_proveedor() != null){
+                    Fragment fragment = ProductFragment.newInstance(proveedor.getId_proveedor());
+                    FragmentManager fragmentManager = activity.getSupportFragmentManager();
+                    fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).addToBackStack("tag").commit();
+                }
+
             }
         });
 

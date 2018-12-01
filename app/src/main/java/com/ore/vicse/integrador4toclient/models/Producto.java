@@ -1,6 +1,6 @@
 package com.ore.vicse.integrador4toclient.models;
 
-public abstract class Producto {
+public class Producto {
 
 
     private Integer id_almacen;
