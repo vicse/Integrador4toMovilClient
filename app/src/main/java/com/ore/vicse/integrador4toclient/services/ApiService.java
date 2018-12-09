@@ -1,6 +1,7 @@
 package com.ore.vicse.integrador4toclient.services;
 
 import com.ore.vicse.integrador4toclient.models.Cliente;
+import com.ore.vicse.integrador4toclient.models.Pedido;
 import com.ore.vicse.integrador4toclient.models.Producto;
 import com.ore.vicse.integrador4toclient.models.Proveedor;
 
@@ -33,5 +34,8 @@ public interface ApiService {
 
     @GET("proveedores/{id}/productos")
     Call<List<Producto>> getProductos(@Path("id") Integer id);
+
+    @GET("/cliente/{id}/pedidos")
+    Call<List<Pedido>> getPedidos(@Path("id") Integer id);
 
 }

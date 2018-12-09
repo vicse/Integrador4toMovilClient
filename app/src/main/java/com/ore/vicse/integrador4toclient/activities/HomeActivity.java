@@ -21,6 +21,7 @@ import com.ore.vicse.integrador4toclient.R;
 import com.ore.vicse.integrador4toclient.fragments.HomeFragment;
 import com.ore.vicse.integrador4toclient.fragments.InfoFragment;
 import com.ore.vicse.integrador4toclient.fragments.MapFragment;
+import com.ore.vicse.integrador4toclient.fragments.PedidoFragment;
 import com.ore.vicse.integrador4toclient.fragments.ProductFragment;
 import com.ore.vicse.integrador4toclient.fragments.ProviderFragment;
 
@@ -28,6 +29,7 @@ public class HomeActivity extends AppCompatActivity {
 
     private String nombreCli;
     private String correoCli;
+    private Integer idClient;
 
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
@@ -45,6 +47,8 @@ public class HomeActivity extends AppCompatActivity {
 
         nombreCli = preferences.getString("nombre", "Cliente");
         correoCli = preferences.getString("correo", "cliente@tecsup.edu.pe");
+
+        idClient = preferences.getInt("id", 0);
 
         // Change navigation header information
         ImageView photoImage = (ImageView) navigationView.getHeaderView(0).findViewById(R.id.menu_photo);
@@ -95,6 +99,13 @@ public class HomeActivity extends AppCompatActivity {
                     case R.id.menu_provider:
                         fragment = new ProviderFragment();
                         fragmentTransaction = true;
+                        break;
+                    case R.id.menu_pedido:
+                        fragment = new PedidoFragment();
+                        fragmentTransaction = true;
+                        Bundle datos = new Bundle();
+                        datos.putInt("idCli", idClient);
+                        fragment.setArguments(datos);
                         break;
                     case R.id.menu_map:
                         fragment = new MapFragment();

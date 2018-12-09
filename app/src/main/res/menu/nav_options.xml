@@ -13,6 +13,11 @@
             android:title="Proveedores" />
 
         <item
+            android:id="@+id/menu_pedido"
+            android:icon="@drawable/ic_pedidos"
+            android:title="Mis pedidos" />
+
+        <item
             android:id="@+id/menu_map"
             android:icon="@drawable/ic_map"
             android:title="Mapa" />
