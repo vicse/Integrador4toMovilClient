@@ -5,6 +5,7 @@ import com.ore.vicse.integrador4toclient.models.Pedido;
 import com.ore.vicse.integrador4toclient.models.Producto;
 import com.ore.vicse.integrador4toclient.models.Proveedor;
 
+import java.net.URLDecoder;
 import java.util.List;
 
 import retrofit2.Call;
@@ -37,5 +38,10 @@ public interface ApiService {
 
     @GET("/cliente/{id}/pedidos")
     Call<List<Pedido>> getPedidos(@Path("id") Integer id);
+
+    @FormUrlEncoded
+    @POST("/clientes/login/")
+    Call<Cliente> login (@Field("dni") String dni,
+                        @Field("password") String password);
 
 }

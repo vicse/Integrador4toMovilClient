@@ -23,6 +23,7 @@ public class RegisterClientActivity extends AppCompatActivity {
 
     private static final String TAG = RegisterClientActivity.class.getSimpleName();
 
+    private SharedPreferences mPrefs;
     private EditText nombreInput, correoInput, dniInput, direccionInput, passwordInput;
 
     @Override
@@ -76,16 +77,17 @@ public class RegisterClientActivity extends AppCompatActivity {
                         Log.d(TAG, "cliente: " + cliente);
                         Toast.makeText(RegisterClientActivity.this, "Registro satisfactorio", Toast.LENGTH_LONG).show();
 
-                        SharedPreferences preferences = getSharedPreferences("credenciales", Context.MODE_PRIVATE);
+                        /*SharedPreferences preferences = getSharedPreferences("credenciales", Context.MODE_PRIVATE);*/
+                        mPrefs = getSharedPreferences("credenciales", Context.MODE_PRIVATE);
 
-                        SharedPreferences.Editor editor=preferences.edit();
+                        SharedPreferences.Editor editor=mPrefs.edit();
                         editor.putInt("id", cliente.getId_cliente());
                         editor.putString("nombre", nombre);
                         editor.putString("correo", correo);
                         editor.putString("dni", dni);
                         editor.putString("direccion", direccion);
                         editor.putString("password", password);
-                        editor.commit();
+                        editor.apply();
 
                         startActivity(new Intent(RegisterClientActivity.this, HomeActivity.class));
                         finish();

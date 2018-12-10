@@ -3,7 +3,7 @@ package com.ore.vicse.integrador4toclient.models;
 public class Cliente {
 
     private Integer id_cliente;
-    private String name;
+    private String nombre;
     private String correo;
     private String dni;
     private String password;
@@ -19,12 +19,12 @@ public class Cliente {
         this.id_cliente = id_cliente;
     }
 
-    public String getName() {
-        return name;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNombre(String name) {
+        this.nombre = name;
     }
 
     public String getCorreo() {
@@ -79,7 +79,7 @@ public class Cliente {
     public String toString() {
         return "Cliente{" +
                 "id_cliente=" + id_cliente +
-                ", name='" + name + '\'' +
+                ", nombre='" + nombre + '\'' +
                 ", correo='" + correo + '\'' +
                 ", dni='" + dni + '\'' +
                 ", password='" + password + '\'' +

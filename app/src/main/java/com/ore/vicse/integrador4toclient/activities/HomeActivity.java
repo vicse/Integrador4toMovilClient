@@ -27,6 +27,8 @@ import com.ore.vicse.integrador4toclient.fragments.ProviderFragment;
 
 public class HomeActivity extends AppCompatActivity {
 
+    private SharedPreferences mPrefs;
+
     private String nombreCli;
     private String correoCli;
     private Integer idClient;
@@ -119,8 +121,8 @@ public class HomeActivity extends AppCompatActivity {
                         Toast.makeText(HomeActivity.this,"Configuración",Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.menu_out:
-                        Intent intent = new Intent(HomeActivity.this, MainActivity.class);
-                        startActivity(intent);
+                        logOut();
+                        startActivity(new Intent(HomeActivity.this, MainActivity.class));
                         break;
                 }
 
@@ -131,6 +133,18 @@ public class HomeActivity extends AppCompatActivity {
                 return true;
             }
         });
+    }
+
+    public void logOut(){
+        mPrefs = getSharedPreferences("credenciales", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor=mPrefs.edit();
+        editor.putInt("id", 0);
+        editor.putString("nombre", null);
+        editor.putString("correo", null);
+        editor.putString("dni", null);
+        editor.putString("direccion", null);
+        editor.putString("password", null);
+        editor.apply();
     }
 
     private void setToolbar(){
