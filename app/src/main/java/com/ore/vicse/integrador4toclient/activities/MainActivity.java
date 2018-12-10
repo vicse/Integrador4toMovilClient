@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
 
                     }else{
                         Log.e(TAG, "onError: "+ response.errorBody().string());
-                        throw new Exception("Error en el servicio");
+                        throw new Exception("No registrado en la app");
                     }
                 }catch (Throwable t){
                     try{
